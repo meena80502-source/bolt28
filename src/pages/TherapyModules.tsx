@@ -130,18 +130,6 @@ function TherapyModules() {
     },
     {
       id: 3,
-      moduleId: 'sleep',
-      title: 'Sleep Therapy',
-      description: 'Improve sleep quality with proven techniques and tracking',
-      icon: Moon,
-      color: 'from-indigo-500 to-purple-500',
-      duration: '20-25 min',
-      difficulty: 'Intermediate',
-      sessions: 10,
-      route: '/therapy-modules/sleep'
-    },
-    {
-      id: 4,
       moduleId: 'stress',
       title: 'Stress Management',
       description: 'Learn effective coping strategies for daily stress',
@@ -153,7 +141,7 @@ function TherapyModules() {
       route: '/therapy-modules/stress'
     },
     {
-      id: 5,
+      id: 4,
       moduleId: 'gratitude',
       title: 'Gratitude Journal',
       description: 'Daily gratitude practice with streak tracking',
@@ -165,19 +153,7 @@ function TherapyModules() {
       route: '/therapy-modules/gratitude'
     },
     {
-      id: 6,
-      moduleId: 'addiction',
-      title: 'Addiction Support',
-      description: 'Resources and strategies for overcoming addictive behaviors',
-      icon: Users,
-      color: 'from-red-500 to-pink-500',
-      duration: '25-30 min',
-      difficulty: 'Advanced',
-      sessions: 16,
-      route: '/therapy-modules/addiction'
-    },
-    {
-      id: 7,
+      id: 5,
       moduleId: 'music',
       title: 'Relaxation Music',
       description: 'Curated audio library for relaxation and focus',
@@ -189,7 +165,7 @@ function TherapyModules() {
       route: '/therapy-modules/music'
     },
     {
-      id: 8,
+      id: 6,
       moduleId: 'tetris',
       title: 'Tetris Therapy',
       description: 'Gamified stress relief and cognitive enhancement',
@@ -201,7 +177,7 @@ function TherapyModules() {
       route: '/therapy-modules/tetris'
     },
     {
-      id: 9,
+      id: 7,
       moduleId: 'art',
       title: 'Art & Color Therapy',
       description: 'Creative expression through digital art and coloring',
@@ -213,7 +189,7 @@ function TherapyModules() {
       route: '/therapy-modules/art'
     },
     {
-      id: 10,
+      id: 8,
       moduleId: 'exposure',
       title: 'Exposure Therapy',
       description: 'Gradual exposure techniques for anxiety and phobias',
@@ -225,7 +201,7 @@ function TherapyModules() {
       route: '/therapy-modules/exposure'
     },
     {
-      id: 11,
+      id: 9,
       moduleId: 'video',
       title: 'Video Therapy',
       description: 'Guided video sessions with therapeutic content',
@@ -237,7 +213,7 @@ function TherapyModules() {
       route: '/therapy-modules/video'
     },
     {
-      id: 12,
+      id: 10,
       moduleId: 'act',
       title: 'Acceptance & Commitment Therapy',
       description: 'ACT principles for psychological flexibility',
@@ -434,53 +410,6 @@ function TherapyModules() {
           ))}
         </div>
 
-        {/* Recommended Path */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className={`p-4 rounded-xl shadow-lg ${
-            theme === 'dark' ? 'bg-gray-800' : 'bg-white'
-          }`}
-        >
-          <h3 className={`text-lg font-semibold mb-3 ${
-            theme === 'dark' ? 'text-white' : 'text-gray-800'
-          }`}>
-            Recommended Learning Path
-          </h3>
-          <p className={`mb-4 text-sm ${
-            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-          }`}>
-            Based on your progress and goals, we recommend starting with these modules:
-          </p>
-          
-          <div className="grid md:grid-cols-3 gap-3">
-            {therapyModules.slice(3, 6).map((module, index) => (
-              <div
-                key={module.id}
-                className={`p-3 rounded-lg border-2 border-dashed ${
-                  theme === 'dark' ? 'border-gray-600' : 'border-gray-300'
-                }`}
-              >
-                <div className="flex items-center space-x-2 mb-2">
-                  <div className={`w-6 h-6 rounded-lg bg-gradient-to-r ${module.color} flex items-center justify-center`}>
-                    <module.icon className="w-3 h-3 text-white" />
-                  </div>
-                  <span className={`text-sm font-medium ${
-                    theme === 'dark' ? 'text-white' : 'text-gray-800'
-                  }`}>
-                    {module.title}
-                  </span>
-                </div>
-                <p className={`text-xs ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                }`}>
-                  Step {index + 1} in your journey
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </div>
   );

@@ -54,6 +54,7 @@ function ProgressPage() {
     { 
       title: 'Therapy Graduate', 
       description: 'Complete 3 therapy modules', 
+      description: 'Complete 2 therapy modules', 
       earned: false, 
       progress: 0
     }
@@ -201,9 +202,7 @@ function ProgressPage() {
     const cbtRecords = JSON.parse(localStorage.getItem('mindcare_cbt_records') || '[]');
     const gratitudeEntries = JSON.parse(localStorage.getItem('mindcare_gratitude_entries') || '[]');
     const sleepLogs = JSON.parse(localStorage.getItem('mindcare_sleep_logs') || '[]');
-    const moodEntries = JSON.parse(localStorage.getItem('mindcare_mood_entries') || '[]');
     const exposureSessions = JSON.parse(localStorage.getItem('mindcare_exposure_sessions') || '[]');
-    const cravingLogs = JSON.parse(localStorage.getItem('mindcare_craving_logs') || '[]');
     const stressLogs = JSON.parse(localStorage.getItem('mindcare_stress_logs') || '[]');
     const videoProgress = JSON.parse(localStorage.getItem('mindcare_video_progress') || '[]');
     const actValues = JSON.parse(localStorage.getItem('mindcare_act_values') || '[]');
@@ -211,17 +210,15 @@ function ProgressPage() {
     // Filter data for current user
     const userCBT = cbtRecords.filter((r: any) => r.userId === user?.id || !r.userId);
     const userGratitude = gratitudeEntries.filter((e: any) => e.userId === user?.id || !e.userId);
-    const userSleep = sleepLogs.filter((l: any) => l.userId === user?.id || !l.userId);
     const userMood = moodEntries.filter((e: any) => e.userId === user?.id || !e.userId);
     const userExposure = exposureSessions.filter((s: any) => s.userId === user?.id || !s.userId);
-    const userCraving = cravingLogs.filter((l: any) => l.userId === user?.id || !l.userId);
     const userStress = stressLogs.filter((l: any) => l.userId === user?.id || !l.userId);
     const userVideo = videoProgress.filter((p: any) => p.userId === user?.id || !p.userId);
     const userACT = actValues.filter((v: any) => v.userId === user?.id || !v.userId);
 
     // Calculate total therapy sessions from all activities
-    const totalActivities = userCBT.length + userGratitude.length + userSleep.length + 
-                           userExposure.length + userCraving.length + userStress.length + 
+    const totalActivities = userCBT.length + userGratitude.length + 
+                           userExposure.length + userStress.length + 
                            userVideo.length + userACT.length;
     setTotalTherapySessions(totalActivities);
 
@@ -256,25 +253,11 @@ function ProgressPage() {
         description: 'Stress reduction and coping strategies'
       },
       { 
-        id: 'gratitude', 
-        name: 'Gratitude Journal', 
-        total: 30,
-        completed: userGratitude.length,
-        description: 'Daily gratitude practice'
-      },
-      { 
         id: 'addiction', 
         name: 'Addiction Support', 
         total: 16,
         completed: userCraving.length,
         description: 'Addiction recovery support tools'
-      },
-      { 
-        id: 'music', 
-        name: 'Relaxation Music', 
-        total: 10,
-        completed: Math.floor(totalActivities * 0.1), // Estimate
-        description: 'Therapeutic music sessions'
       },
       { 
         id: 'tetris', 
@@ -331,7 +314,6 @@ function ProgressPage() {
     // Load all user activities for the past week
     const moodEntries = JSON.parse(localStorage.getItem('mindcare_mood_entries') || '[]');
     const cbtRecords = JSON.parse(localStorage.getItem('mindcare_cbt_records') || '[]');
-    const gratitudeEntries = JSON.parse(localStorage.getItem('mindcare_gratitude_entries') || '[]');
     const sleepLogs = JSON.parse(localStorage.getItem('mindcare_sleep_logs') || '[]');
 
     // Filter for current user and past week
@@ -344,9 +326,6 @@ function ProgressPage() {
     const userGratitude = gratitudeEntries.filter((e: any) => 
       (e.userId === user?.id || !e.userId) && new Date(e.date) >= oneWeekAgo
     );
-    const userSleep = sleepLogs.filter((l: any) => 
-      (l.userId === user?.id || !l.userId) && new Date(l.date) >= oneWeekAgo
-    );
 
     const weeklyData = weekDays.map((day, index) => {
       const dayDate = new Date();
@@ -357,9 +336,8 @@ function ProgressPage() {
       const dayMoodEntries = userMoodEntries.filter((e: any) => e.date === dayString);
       const dayCBT = userCBT.filter((r: any) => r.date === dayString);
       const dayGratitude = userGratitude.filter((e: any) => e.date === dayString);
-      const daySleep = userSleep.filter((l: any) => l.date === dayString);
 
-      const totalSessions = dayMoodEntries.length + dayCBT.length + dayGratitude.length + daySleep.length;
+      const totalSessions = dayMoodEntries.length + dayCBT.length + dayGratitude.length;
       
       // Calculate average mood for the day
       const avgMood = dayMoodEntries.length > 0 
@@ -390,13 +368,11 @@ function ProgressPage() {
     // Load all therapy activities
     const cbtRecords = JSON.parse(localStorage.getItem('mindcare_cbt_records') || '[]');
     const gratitudeEntries = JSON.parse(localStorage.getItem('mindcare_gratitude_entries') || '[]');
-    const sleepLogs = JSON.parse(localStorage.getItem('mindcare_sleep_logs') || '[]');
     const exposureSessions = JSON.parse(localStorage.getItem('mindcare_exposure_sessions') || '[]');
     const videoProgress = JSON.parse(localStorage.getItem('mindcare_video_progress') || '[]');
 
     const userCBT = cbtRecords.filter((r: any) => r.userId === user?.id || !r.userId);
     const userGratitude = gratitudeEntries.filter((e: any) => e.userId === user?.id || !e.userId);
-    const userSleep = sleepLogs.filter((l: any) => l.userId === user?.id || !l.userId);
     const userExposure = exposureSessions.filter((s: any) => s.userId === user?.id || !s.userId);
     const userVideo = videoProgress.filter((p: any) => p.userId === user?.id || !p.userId);
 
@@ -414,7 +390,6 @@ function ProgressPage() {
     const completedModules = [
       userCBT.length >= 3 ? 1 : 0,
       userGratitude.length >= 7 ? 1 : 0,
-      userSleep.length >= 3 ? 1 : 0,
       mindfulnessSessions >= 5 ? 1 : 0,
       userVideo.length >= 2 ? 1 : 0
     ].reduce((sum, val) => sum + val, 0);
@@ -429,8 +404,8 @@ function ProgressPage() {
     achievements[2].earned = goodSleepDays >= 5;
     achievements[2].progress = Math.min(100, (goodSleepDays / 5) * 100);
 
-    achievements[3].earned = completedModules >= 3;
-    achievements[3].progress = Math.min(100, (completedModules / 3) * 100);
+    achievements[3].earned = completedModules >= 2;
+    achievements[3].progress = Math.min(100, (completedModules / 2) * 100);
   };
 
   const calculateTherapyProgress = () => {

@@ -156,19 +156,6 @@ function PatientDashboard() {
       }));
     activities.push(...userGratitudeEntries);
 
-    // Load sleep logs
-    const sleepLogs = JSON.parse(localStorage.getItem('mindcare_sleep_logs') || '[]');
-    const userSleepLogs = sleepLogs
-      .filter((log: any) => log.userId === user.id || !log.userId)
-      .slice(-1)
-      .map((log: any) => ({
-        module: 'Sleep Therapy',
-        time: getRelativeTime(log.date),
-        duration: '30 min',
-        type: 'sleep'
-      }));
-    activities.push(...userSleepLogs);
-
     // Load completed sessions
     const bookings = JSON.parse(localStorage.getItem('mindcare_bookings') || '[]');
     const userSessions = bookings
@@ -450,7 +437,6 @@ function PatientDashboard() {
                       {activity.type === 'mood' && <Heart className="w-4 h-4 text-purple-600" />}
                       {activity.type === 'cbt' && <Brain className="w-4 h-4 text-blue-600" />}
                       {activity.type === 'gratitude' && <Heart className="w-4 h-4 text-green-600" />}
-                      {activity.type === 'sleep' && <Moon className="w-4 h-4 text-indigo-600" />}
                       {activity.type === 'session' && <Video className="w-4 h-4 text-teal-600" />}
                       {activity.type === 'welcome' && <Heart className="w-4 h-4 text-purple-600" />}
                     </div>
