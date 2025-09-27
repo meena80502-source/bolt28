@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 import { 
   Heart, Moon, Brain, Target, Smile, Meh, Frown, Award, 
   Filter, Download, CheckCircle, PieChart as PieChartIcon,
